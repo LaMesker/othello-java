@@ -39,8 +39,6 @@ From project root:
 - test/othello — unit tests (BoardTest, GameTest)
 
 ## Round-by-round screenshots / states
-Use the placeholders below to add screenshots showing the board state after each round. Replace the sample paths with your screenshots.
-
 
 Round 0
 ![Round 0](https://github.com/LaMesker/othello-java/blob/main/Screenshots/round0.png)
