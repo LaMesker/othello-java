@@ -24,8 +24,6 @@ From project root:
 - Run:
   java -cp out othello.OthelloMain
 
-(Or open the project in your IDE and run OthelloMain.)
-
 ## Running tests
 - Tests are JUnit-based in test/othello. Run them in your IDE or configure a JUnit runner (not included here).
 
