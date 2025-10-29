@@ -45,22 +45,22 @@ Use the placeholders below to add screenshots showing the board state after each
 
 
 Round 0
-![Round 0](screenshots/round-04.png)
+![Round 0](https://github.com/LaMesker/othello-java/blob/main/Screenshots/round0.png)
 
 
 
 Round 1
-![Round 1](screenshots/round-01.png)
+![Round 1](https://github.com/LaMesker/othello-java/blob/main/Screenshots/round1.png)
 
 
 
 Round 2
-![Round 2](screenshots/round-02.png)
+![Round 2](https://github.com/LaMesker/othello-java/blob/main/Screenshots/round2.png)
 
 
 
 Round 3
-![Round 3](screenshots/round-03.png)
+![Round 3](https://github.com/LaMesker/othello-java/blob/main/Screenshots/round3.png)
 
 
 
