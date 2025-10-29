@@ -1,86 +1,62 @@
-# TP5 - 
+# Othello (Reversi) — Commandes de compilation et d'exécution (Windows / VS Code)
 
-## Auteurs
+Ce fichier récapitule les commandes que j'ai utilisées pour compiler et exécuter le projet Java sous Windows (VS Code terminal).
 
-- Noé Le Van Canh dit Ban
-- Wassim Cherabi
+Prérequis
+- JDK/JRE installés (vous avez indiqué java version "1.8.0_451").
+- Lancer les commandes depuis la racine du projet :
+  C:\Users\baeju\Desktop\othello-java\othello
 
-## Objectifs
-
-Determiner et créer plusieurs class et method afin de reproduire le jeu d'othello
-
-### Objectits atteints
-
-Nous sommes arriver au à l'objectif final de refaire un jeu d'othello à l'aide de 8 fichiers classes et des méthodes
-
-### Difficultés rencontrée
-
-Nous avons encore eu du mal à compiler les classes test du a des erreurs avec les asserts malgré les imports 
-
-```import static org.junit.jupiter.api.Assertions.*;```
-
-Cependant les test ont été validé sur VsCode
-
-## Comment générer la documentation ?
-
-Afin de générer la documentation il faut executer la commande suivante en se situant dans le dossier tp5:
-
+Vérifier les versions
 ```
-javadoc -sourcepath src src/othello/*.java -d docs 
+java -version
+javac -version
 ```
 
-## Comment compiler les classes de test du projet ?
-
-Afin de compiler les classes test du projet il faut utiliser la commande suivante en se situant dans le dossier tp5 :
-
+Option A — Utiliser l'invite de commandes (cmd.exe) — méthode simple et fiable
 ```
-javac -sourcepath src test/othello/*.java -d classes/test
+cd /d C:\Users\baeju\Desktop\othello-java\othello
+rmdir /s /q out 2>nul
+mkdir out
+rem créer la liste des sources (tapez ceci dans cmd, utilisez %f)
+(for /r %f in (*.java) do @echo %f) > sources.txt
+javac -d out @sources.txt
+del sources.txt
+rem exécuter (2 noms de joueurs requis)
+java -cp out othello.OthelloMain Alice Bob
 ```
-
-## Comment exécuter les tests ?
-
-On utilise les commandes suivantes en se situant dans le dossier tp4 après compilation des classes:
-
+Remarque : si la JVM d'exécution est Java 8 et javac est plus récent, recompilez en ciblant 1.8 :
 ```
-java -classpath classes BoardTest
-```
-
-```
-java -classpath classes GameTest
+javac -source 1.8 -target 1.8 -d out @sources.txt
 ```
 
-
-## Comment compiler les classes du projet ?
-
-Il faut utiliser la commande suivante en se situant dans le dossier tp5 :
-
+Option B — Utiliser PowerShell (sans @sources.txt comme param littéral)
 ```
-javac -sourcepath src src/othello/*.java -d classes/src
-```
-
-## Comment créer le jar exécutable ? (une fois qu’on l’aura vu)
-
-On utilise la commande suivante en se situant dans le dossier tp5 :
-
-```
-java -classpath classes OthelloMain 
+Set-Location 'C:\Users\baeju\Desktop\othello-java\othello'
+Remove-Item -Recurse -Force .\out -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path out | Out-Null
+$files = Get-ChildItem -Path .\src -Recurse -Filter *.java | Select-Object -ExpandProperty FullName
+javac -d out $files
+java -cp out othello.OthelloMain Alice Bob
 ```
 
-## Comment tester l'exécution du programme ?
-
-Il faut utiliser la commande suivante , on peut remplacer tim et leo par les noms souhaité :
-
+Génération de la documentation (javadoc)
 ```
-java -classpath classes othello.OthelloMain tim leo
+javadoc -sourcepath src -subpackages othello -d docs
 ```
 
-## Comment exécuter le jar exécutable ?
-
-On utilise la commande suivante en se situant dans le dossier tp5 :
-
+Compiler les tests (remarque : pour compiler/ exécuter des tests JUnit, ajoutez le .jar JUnit au classpath)
+- Commande de compilation simple (sans JUnit sur le classpath) :
 ```
-java -jar junit-console.jar -classpath test:classes -scan-classpath
+javac -sourcepath src -d classes\src @sources.txt
+javac -sourcepath src -d classes\test test\othello\*.java
 ```
+- Pour exécuter des tests JUnit, utilisez un runner JUnit et fournissez le jar JUnit dans le classpath (ex. junit-platform-console-standalone).
+
+Notes utiles
+- PowerShell n'expande pas les globbing patterns de la même façon que cmd ; c'est la raison d'utiliser la méthode de collecte de fichiers ou d'exécuter javac depuis cmd.exe.
+- Si vous rencontrez UnsupportedClassVersionError, soit installez un JRE plus récent, soit recompilez en ciblant la version de votre runtime (-source/-target 1.8).
+- Si le programme lit avec System.console() et que console() renvoie null dans VS Code, exécutez-le dans un terminal externe (cmd) ou modifiez OthelloMain pour utiliser Scanner(System.in).
 
 
 

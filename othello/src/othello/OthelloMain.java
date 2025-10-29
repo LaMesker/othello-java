@@ -1,5 +1,6 @@
 package othello;
 import othello.positions.InvalidPositionException;
+import java.util.Scanner;
 
 public class OthelloMain {
     public static void main(String[] args) throws InvalidPositionException {
@@ -11,15 +12,16 @@ public class OthelloMain {
         System.out.println("Welcome to Othello");
         System.out.println("Black pawns are represented by X");
         System.out.println("White pawns are represented by O");
+        Scanner scanner = new Scanner(System.in);
         while (!othello.gameOver()) {
             int x = 0;
             int y = 0;
             othello.displayBoard();
             System.out.println(othello.getCurrentPlayer().getName() + " plays " + othello.getCurrentPlayer().getColor() + " Pawns" );
             System.out.println("Enter the position line of your pawn: ");
-            x = Integer.parseInt(System.console().readLine());
+            x = Integer.parseInt(scanner.nextLine().trim());
             System.out.println("Enter the position column of your pawn: ");
-            y = Integer.parseInt(System.console().readLine());
+            y = Integer.parseInt(scanner.nextLine().trim());
             if (x < 1 || x > othello.getBoard().length || y < 1 || y > othello.getBoard().length ) {
                 System.out.println("Invalid position");
                 continue;
@@ -34,15 +36,14 @@ public class OthelloMain {
                     System.out.println("-----------------------------------------------------------");
                     System.out.println("Game Over");
                     othello.displayBoard();
-                    System.out.println("There is" + othello.numberOfBlackPawns() + "black pawns");
-                    System.out.println("There is" + othello.numberOfWhitePawns() + "white pawns");
+                    System.out.println("There is " + othello.numberOfBlackPawns() + " black pawns");
+                    System.out.println("There is " + othello.numberOfWhitePawns() + " white pawns");
                     System.out.println("The winner is " + othello.isWinner().getName());
                     System.out.println("-----------------------------------------------------------");
                 }
-            
             }
-            
         }
+        scanner.close();
     }
 }
 
